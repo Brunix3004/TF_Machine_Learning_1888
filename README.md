@@ -130,6 +130,7 @@ pip install -r requirements.txt
 - **NLTK/SpaCy** - Procesamiento de texto
 - **Matplotlib/Seaborn** - Visualización de datos
 - **Plotly/Bokeh/Altair** - Visualizaciones interactivas
+- **Jupyter/JupyterLab** - Notebooks interactivos
 
 ## 📝 Uso
 
