@@ -50,6 +50,7 @@ datasets/**/*.png
 datasets/**/*.gif
 datasets/**/*.bmp
 datasets/**/*.tiff
+datasets/**/*.csv
 
 # Model files (opcional - descomenta si no quieres subir modelos grandes)
 # models/saved/
