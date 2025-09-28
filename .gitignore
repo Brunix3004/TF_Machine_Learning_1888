@@ -42,12 +42,14 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# Data files (opcional - descomenta si no quieres subir datasets grandes)
-# datasets/raw/
-# datasets/processed/
-# *.csv
-# *.json
-# *.pkl
+# Data files - Ignorar archivos específicos en datasets
+datasets/**/*.txt
+datasets/**/*.jpg
+datasets/**/*.jpeg
+datasets/**/*.png
+datasets/**/*.gif
+datasets/**/*.bmp
+datasets/**/*.tiff
 
 # Model files (opcional - descomenta si no quieres subir modelos grandes)
 # models/saved/
