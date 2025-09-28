@@ -6,9 +6,9 @@ Este repositorio alberga el desarrollo del proyecto final del Curso de Machine L
 
 Proyecto de Machine Learning que incluye:
 - **Datasets**: Para texto e imágenes
-- **Procesamiento**: De datos textuales e imágenes
-- **Visualización**: Generación de gráficas importantes y análisis de datos
-- **Modelos**: Entrenamiento de modelos de visión y texto (Naive Bayes, etc.)
+- **Procesamiento**: De datos textuales e imágenes con herramientas básicas
+- **Visualización**: Generación de gráficas importantes y análisis exploratorio
+- **Modelos**: Algoritmos básicos de ML (Naive Bayes, etc.) y procesamiento de imágenes
 
 ## 📁 Estructura del Proyecto
 
@@ -107,29 +107,29 @@ pip install -r requirements.txt
 - Integración con datasets externos
 
 ### Procesamiento
-- Pipeline de procesamiento para texto
-- Pipeline de procesamiento para imágenes
-- Ingeniería de características avanzada
+- Pipeline de procesamiento para texto con NLTK/SpaCy
+- Pipeline de procesamiento para imágenes con Pillow/OpenCV
+- Ingeniería de características básica
 
 ### Modelos
-- Modelos de texto (Naive Bayes, etc.)
-- Modelos de visión
-- Sistema de versionado de modelos
+- Modelos básicos de texto (Naive Bayes, etc.)
+- Modelos de visión y procesamiento de imágenes
+- Algoritmos de machine learning clásico
 
 ### Visualización
 - Gráficos estáticos con matplotlib/seaborn
-- Dashboards interactivos con plotly/bokeh
-- Reportes automatizados
+- Visualizaciones interactivas con plotly/bokeh/altair
+- Análisis exploratorio de datos
 
 ## 🛠️ Tecnologías Utilizadas
 
 - **Python 3.8+**
-- **TensorFlow/Keras** - Deep Learning
-- **PyTorch** - Deep Learning
-- **Scikit-learn** - Machine Learning clásico
-- **Pandas/NumPy** - Manipulación de datos
-- **Matplotlib/Seaborn** - Visualización
-- **Jupyter** - Notebooks interactivos
+- **NumPy/Pandas** - Manipulación y análisis de datos
+- **Pillow/OpenCV** - Procesamiento de imágenes
+- **SciPy** - Computación científica
+- **NLTK/SpaCy** - Procesamiento de texto
+- **Matplotlib/Seaborn** - Visualización de datos
+- **Plotly/Bokeh/Altair** - Visualizaciones interactivas
 
 ## 📝 Uso
 
