@@ -1,0 +1,16 @@
+# Machine Learning Core
+numpy>=1.21.0
+pandas>=1.3.0
+# Data Processing
+Pillow>=8.3.0
+opencv-python>=4.5.0
+scipy>=1.7.0
+nltk>=3.7
+spacy>=3.4.0
+
+# Visualization
+matplotlib>=3.5.0
+seaborn>=0.11.0
+plotly>=5.0.0
+bokeh>=2.4.0
+altair>=4.2.0
