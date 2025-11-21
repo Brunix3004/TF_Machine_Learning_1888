@@ -66,3 +66,10 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+# resultados de los modelos
+training/results/*
+*.joblib
+*.keras
+*.h5
+*.json
