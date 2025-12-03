@@ -1,7 +1,0 @@
-names:
-- Nodule/Mass
-- Other lesion
-nc: 2
-path: C:\Users\Sebastian\Desktop\MachineLearningPC2\TF_Machine_Learning_1888\datasets\processed\images
-train: train/images
-val: val/images

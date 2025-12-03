@@ -40,7 +40,7 @@ def root():
 # =======================================
 
 text_model_path = os.path.join("backend", "models", "xgboost_breast_cancer.joblib")
-image_model_path = os.path.join("backend", "models", "cnn_breast_keras_25epochs.keras")
+image_model_path = os.path.join("backend", "models", "cnn_breast_keras_10epochs.keras")
 
 try:
     text_model = joblib.load(text_model_path)
@@ -99,7 +99,33 @@ async def predict_multimodal(
     # ----------- IMAGEN -----------
     try:
         img_array = prepare_image(file.file)
-        prob_image = float(image_model.predict(img_array)[0][0])
+        # Obtener predicción del modelo
+        prediction = image_model.predict(img_array, verbose=0)
+        
+        # Debug: verificar la forma de la salida
+        # El modelo tiene Dense(1, activation='sigmoid'), así que debería ser shape (1, 1)
+        # Si la salida es (1, 1), entonces [0][0] es correcto
+        # Si la salida es diferente, necesitamos ajustar el índice
+        
+        # Extraer probabilidad
+        if prediction.ndim == 2:
+            # Si es (batch, 1) o (batch, 2)
+            if prediction.shape[1] == 1:
+                prob_image = float(prediction[0][0])
+            elif prediction.shape[1] == 2:
+                # Si tiene 2 salidas, tomar la probabilidad de la clase positiva (índice 1)
+                prob_image = float(prediction[0][1])
+            else:
+                prob_image = float(prediction[0][0])
+        else:
+            # Si es un array 1D
+            prob_image = float(prediction[0])
+        
+        # Debug temporal: imprimir valores para diagnóstico
+        print(f"🔍 DEBUG imagen - Shape: {prediction.shape}, Valor raw: {prediction}, Probabilidad: {prob_image}")
+        
+        # Asegurar que esté en el rango [0, 1]
+        prob_image = max(0.0, min(1.0, prob_image))
         pred_image = 1 if prob_image >= 0.5 else 0
     except UnidentifiedImageError:
         raise HTTPException(status_code=400, detail="Archivo subido no es una imagen válida.")
