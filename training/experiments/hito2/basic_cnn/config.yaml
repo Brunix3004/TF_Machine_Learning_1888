@@ -1,0 +1,200 @@
+# Configuración para CNN Básica - Clasificación de Lesiones Pulmonares
+# Hito 2: Experimentos con CNN Básica
+
+# === CONFIGURACIÓN DEL MODELO ===
+model:
+  name: "BasicCNN"
+  num_classes: 2
+  class_names: ["Nodule/Mass", "Other lesion"]
+  dropout_rates: [0.3, 0.4, 0.5]
+  
+  # Arquitectura
+  architecture:
+    input_size: [1, 300, 300]  # [canales, altura, ancho]
+    output_size: 2  # número de clases
+    
+    # Bloques convolucionales
+    conv_blocks:
+      block1:
+        in_channels: 1
+        out_channels: 64
+        kernel_size: 3
+        padding: 1
+        pool_size: 2
+        
+      block2:
+        in_channels: 64
+        out_channels: 128
+        kernel_size: 3
+        padding: 1
+        pool_size: 2
+        dropout: 0.2
+        
+      block3:
+        in_channels: 128
+        out_channels: 256
+        kernel_size: 3
+        padding: 1
+        pool_size: 2
+        dropout: 0.3
+    
+    # Clasificador
+    classifier:
+      fc1_units: 128
+      fc2_units: 3
+      dropout: 0.4
+
+# === CONFIGURACIÓN DE DATOS ===
+data:
+  # Paths
+  dataset_path: "/Users/benjidry/Documents/Github/TF_Machine_Learning_1888/datasets/processed/images_clahe"
+  train_images: "train/images"
+  train_labels: "train/labels"
+  val_images: "val/images"
+  val_labels: "val/labels"
+  
+  # Preprocesamiento
+  preprocessing:
+    resize: [300, 300]  # [altura, ancho]
+    normalize:
+      mean: [0.485]
+      std: [0.229]
+    
+    # CLAHE (ya aplicado en el dataset)
+    clahe:
+      clip_limit: 3.0
+      tile_grid_size: [8, 8]
+  
+  # Data Augmentation (solo entrenamiento)
+  augmentation:
+    horizontal_flip:
+      probability: 0.5
+    rotation:
+      degrees: [-10, 10]
+      probability: 0.3
+
+# === CONFIGURACIÓN DE ENTRENAMIENTO ===
+training:
+  # Hiperparámetros
+  batch_size: 32
+  num_epochs: 30
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  
+  # Optimizador
+  optimizer:
+    type: "AdamW"
+    betas: [0.9, 0.999]
+    eps: 1e-08
+  
+  # Learning Rate Scheduler
+  scheduler:
+    type: "StepLR"
+    step_size: 15
+    gamma: 0.5
+    initial_lr: 0.01
+  
+  # Función de pérdida
+  loss:
+    type: "CrossEntropyLoss"
+    weighted: true  # Usar pesos calculados automáticamente
+  
+  # Regularización
+  regularization:
+    batch_norm: true
+    dropout: true
+    global_avg_pool: true
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 5
+    min_delta: 0.001
+
+# === CONFIGURACIÓN DE EVALUACIÓN ===
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "confusion_matrix"
+  
+  # Guardar predicciones
+  save_predictions: true
+  predictions_file: "basic_cnn_predictions.csv"
+
+# === CONFIGURACIÓN DE GUARDADO ===
+save:
+  # Modelos
+  model_dir: "/Users/benjidry/Documents/Github/TF_Machine_Learning_1888/models/saved"
+  best_model_name: "basic_cnn_best.pth"
+  final_model_name: "basic_cnn_final.pth"
+  
+  # Resultados
+  results_dir: "/Users/benjidry/Documents/Github/TF_Machine_Learning_1888/training/results"
+  history_file: "basic_cnn_training_history.csv"
+  plots_dir: "basic_cnn_plots"
+  
+  # Logs
+  log_dir: "/Users/benjidry/Documents/Github/TF_Machine_Learning_1888/training/logs"
+  log_file: "basic_cnn_training.log"
+
+# === CONFIGURACIÓN DE VISUALIZACIÓN ===
+visualization:
+  # Gráficos de entrenamiento
+  training_plots:
+    - "loss_curve"
+    - "accuracy_curve"
+    - "learning_rate_curve"
+  
+  # Gráficos de evaluación
+  evaluation_plots:
+    - "confusion_matrix"
+    - "classification_report"
+    - "roc_curves"
+  
+  # Configuración de plots
+  plot_config:
+    figsize: [12, 8]
+    dpi: 300
+    style: "seaborn-v0_8"
+    save_format: "png"
+
+# === CONFIGURACIÓN DE HARDWARE ===
+hardware:
+  device: "auto"  # auto, cpu, cuda
+  num_workers: 4
+  pin_memory: true
+  
+  # GPU específico (si hay múltiples)
+  gpu_id: null
+
+# === CONFIGURACIÓN DE LOGGING ===
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Logs específicos
+  log_training: true
+  log_validation: true
+  log_model_info: true
+  log_data_info: true
+
+# === CONFIGURACIÓN DE EXPERIMENTO ===
+experiment:
+  name: "basic_cnn_hito2"
+  description: "CNN Básica para clasificación de lesiones pulmonares con dataset CLAHE"
+  version: "1.0"
+  author: "Sistema de Machine Learning"
+  date: "2024"
+  
+  # Tags para organización
+  tags:
+    - "cnn"
+    - "basic"
+    - "classification"
+    - "medical_imaging"
+    - "lung_lesions"
+    - "clahe"
+    - "hito2"

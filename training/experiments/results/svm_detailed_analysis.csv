@@ -1,0 +1,4 @@
+Métrica,Valor,Porcentaje,Interpretación
+Probabilidad_Falso_Negativo,0.04245283018867924,4.245283018867925,Probabilidad de que un caso maligno sea clasificado como benigno
+Tasa_Falsos_Negativos_FNR,0.04245283018867924,4.245283018867925,Tasa de falsos negativos (complemento del Recall)
+Recall_Sensibilidad,0.9575471698113207,95.75471698113208,Capacidad de detectar casos malignos (1 - FNR)
